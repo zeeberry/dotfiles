@@ -2,11 +2,32 @@
 " don't make vim compatible with vi 
 set nocompatible
 
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+" start plugin defintion
+Plugin 'JamshedVesuna/vim-markdown-preview'
+" -- Web Development
+Plugin 'ap/vim-css-color'      
+Plugin 'hail2u/vim-css3-syntax'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'fatih/vim-go'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+
 " turn on syntax highlighting
 syntax on
 
 " make vim try to detect file types and load plugins for them
-filetype on
+filetype off
 filetype plugin on
 filetype indent on
 
@@ -41,52 +62,3 @@ set shiftwidth=2    " when reading, tabs are 2 spaces
 set softtabstop=2   " in insert mode, tabs are 2 spaces
 set tabstop=2
 set smarttab
-
-"function! ResCur()
-"  if line("'\"") <= line("$")
-"    normal! g`"
-"        return 1
-"	  endif
-"  endfunction
-
-"augroup resCur
-"    autocmd!
-"      autocmd BufWinEnter * call ResCur()
-"augroup END
-
-" ---------------------- PLUGIN CONFIGURATION ----------------------
-"initiate Vundle
-let &runtimepath.=',$HOME/.vim/bundle/Vundle.vim'
-call vundle#begin()
-"let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
-
-" start plugin defintion
-Plugin 'scrooloose/nerdtree'
-Plugin 'itchyny/lightline.vim'      
-Plugin 'Lokaltog/vim-easymotion'    
-Plugin 'tpope/vim-surround'         
-" -- Web Development
-Plugin 'Shutnik/jshint2.vim'        
-Plugin 'mattn/emmet-vim'            
-"Plugin 'skammer/vim-css-color'      
-Plugin 'hail2u/vim-css3-syntax'     
-Plugin 'tpope/vim-rails'
-Plugin 'vim-ruby/vim-ruby'
-  
-" end plugin definition
-call vundle#end()            " required for vundle
-
-map <C-n> :NERDTreeToggle<CR>
-
-let g:lightline = {
-      \ 'colorscheme': 'wombat',
-      \ }
-
-" use zencoding with <C-E>
-let g:user_emmet_leader_key = '<c-e>'
-  
-" run JSHint when a file with .js extension is saved
-" this requires the jsHint2 plugin
-autocmd BufWritePost *.js silent :JSHint
-"let jshint2_save = 1
